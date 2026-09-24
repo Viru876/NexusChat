@@ -1,0 +1,90 @@
+==========================================
+RAILWAY ENVIRONMENT VARIABLES
+Copy these to Railway Dashboard
+==========================================
+
+Go to: https://railway.app
+Your Project -> Variables Tab -> Add Variables
+
+REQUIRED VARIABLES:
+==========================================
+
+NODE_ENV=production
+
+JWT_SECRET=nexuschat_jwt_secret_2024_change_this_to_something_secure
+
+JWT_EXPIRE=7d
+
+CLIENT_URL=https://nexuschat-viru876.vercel.app
+
+PORT=5000
+
+
+OPTIONAL VARIABLES (Add if you need these features):
+==========================================
+
+# Cloudinary (for file uploads)
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+# Email (Gmail App Password or Resend)
+EMAIL_USER=shekhawatvirendrasingh876@gmail.com
+EMAIL_PASS=your_gmail_app_password
+RESEND_API_KEY=your_resend_api_key
+
+# Google OAuth (optional)
+GOOGLE_CLIENT_ID=your_google_oauth_client_id.apps.googleusercontent.com
+
+
+DATABASE:
+==========================================
+
+Option 1 (RECOMMENDED): Add PostgreSQL via Railway
+   - Click "+ New" -> "Database" -> "PostgreSQL"
+   - DATABASE_URL will be automatically created
+
+Option 2: Use External Database (Neon/Supabase)
+   DATABASE_URL=postgresql://username:password@host:5432/database
+
+
+BUILD & START COMMANDS:
+==========================================
+
+Go to: Settings Tab
+
+Build Command:
+npm install && npm run db:generate && npm run build
+
+Start Command:
+npm start
+
+Root Directory:
+(leave empty or set to "/" if at root, or "/server" if monorepo)
+
+
+AFTER SETTING VARIABLES:
+==========================================
+
+1. Railway will auto-redeploy
+2. Push database schema:
+   - Install Railway CLI: npm i -g @railway/cli
+   - Login: railway login
+   - Link: railway link
+   - Push schema: railway run npm run db:push
+
+3. Test your backend:
+   https://nexuschat-server-production-1c58.up.railway.app/api/health
+
+
+TROUBLESHOOTING:
+==========================================
+
+If deployment fails, check Railway logs:
+- Dashboard -> Your Service -> Logs tab
+
+Common issues:
+- DATABASE_URL not set -> Add PostgreSQL
+- Prisma client error -> Check build command includes db:generate
+- Port error -> Ensure PORT=5000 is set
+- CORS error -> Verify CLIENT_URL matches Vercel URL exactly
